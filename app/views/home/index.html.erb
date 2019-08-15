@@ -1,11 +1,11 @@
 <h1>Clock in/out</h1>
 
 <%= form_tag(clock_in_path, method: :post) do %>
-    <%= label_tag(:q, "Email:") %>
+    <%= label_tag(:email, "Email:") %>
     <%= text_field_tag(:email) %>
     <br>
 
-    <%= label_tag(:q, "Password:") %>
+    <%= label_tag(:password, "Password:") %>
     <%= password_field_tag(:password) %>
     <br>
 

@@ -13,10 +13,10 @@
 
   <tbody>
     <% @clock_events.each do |clock_event| %>
-      <tr>
-        <td><%= clock_event.user.full_name %></td>
-        <td><%= clock_event.clock_in_at %></td>
-        <td><%= clock_event.clock_out_at %></td>
+      <tr id=<%= clock_event.id %>>
+        <td class="full_name"><%= clock_event.user.full_name %></td>
+        <td class="clock_in_at"><%= clock_event.clock_in_at %></td>
+        <td class="clock_out_at"><%= clock_event.clock_out_at %></td>
       </tr>
     <% end %>
   </tbody>

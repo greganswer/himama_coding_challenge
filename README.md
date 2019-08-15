@@ -1,5 +1,6 @@
 # HiMama Coding Challenge
 
+- [Production](#production)
 - [Overview](#overview)
 - [Additional questions](#additional-questions)
   - [1. How did you approach this challenge?](#1-how-did-you-approach-this-challenge)
@@ -9,6 +10,12 @@
 - [Design](#design)
   - [User Stories](#user-stories)
 - [References](#references)
+
+## Production
+
+1. Visit https://mighty-sands-32926.herokuapp.com
+1. The test email address is `jane@example.com` the password is `secret`
+1. Test out the [User Stories](#user-stories) linked below
 
 ## Overview
 
@@ -28,11 +35,11 @@ clock-in/out application, using traditional CRUD methods. The app should:
 **Other things to consider:**
 - [x] A teacher may need to clock in/out multiple times a day (e.g., for lunch)
 - [ ] A clock event may need to be edited or deleted
-- [ ] Are there any validations or UI constraints.
+- [x] Are there any validations or UI constraints.
 
 **Code and working prototype:**
-- [ ] Upload the application code to a repo and provide the link.
-- [ ] Make the prototype available for testing by uploading to a free application server (such as Heroku) and provide the link.
+- [x] Upload the application code to a repo and provide the link.
+- [x] Make the prototype available for testing by uploading to a free application server (such as Heroku) and provide the link.
 
 ## Additional questions
 
@@ -51,7 +58,7 @@ clock-in/out application, using traditional CRUD methods. The app should:
 | id              | int          | NO   | PRI | NULL    | auto_increment |
 | first_name      | varchar(255) | NO   |     | NULL    |                |
 | last_name       | varchar(255) | NO   |     | 0       |                |
-| email           | varchar(255) | NO   |     | NULL    |                |
+| email           | varchar(255) | NO   |     | NULL    | Unique         |
 | password_digest | varchar(255) | NO   |     | NULL    |                |
 
 **Clock Event:**

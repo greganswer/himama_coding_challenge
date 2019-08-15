@@ -8,7 +8,7 @@ users = User.create!([
   },
   {
     first_name: "Jane", 
-    last_name: "doe", 
+    last_name: "Doe", 
     email: "jane@example.com", 
     password: 'secret'
   },
