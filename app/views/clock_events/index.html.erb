@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Clock Events</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Clock in at</th>
+      <th>Clock out at</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @clock_events.each do |clock_event| %>
+      <tr>
+        <td><%= clock_event.user.full_name %></td>
+        <td><%= clock_event.clock_in_at %></td>
+        <td><%= clock_event.clock_out_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= paginate @clock_events %>

@@ -8,6 +8,7 @@
   - [4. What if you were given a month?](#4-what-if-you-were-given-a-month)
 - [Design](#design)
   - [User Stories](#user-stories)
+- [References](#references)
 
 ## Overview
 
@@ -20,12 +21,12 @@ clock-in/out application, using traditional CRUD methods. The app should:
 
 - Present a clock-in/out screen that will:
     - [ ] Allow a user to enter their name or log in
-    - [ ] Allow the user to clock either in or out
-    - [ ] Upon clock event, store this information
-    - [ ] Provide a list of all clock events with logged information
+    - [x] Allow the user to clock either in or out
+    - [x] Upon clock event, store this information
+    - [x] Provide a list of all clock events with logged information
 
 **Other things to consider:**
-- [ ] A teacher may need to clock in/out multiple times a day (e.g., for lunch)
+- [x] A teacher may need to clock in/out multiple times a day (e.g., for lunch)
 - [ ] A clock event may need to be edited or deleted
 - [ ] Are there any validations or UI constraints.
 
@@ -43,6 +44,24 @@ clock-in/out application, using traditional CRUD methods. The app should:
 
 ### 2. What schema design did you choose and why?
 
+**User:**
+
+| Field           | Type         | Null | Key | Default | Extra          |
+| --------------- | ------------ | ---- | --- | ------- | -------------- |
+| id              | int          | NO   | PRI | NULL    | auto_increment |
+| first_name      | varchar(255) | NO   |     | NULL    |                |
+| last_name       | varchar(255) | NO   |     | 0       |                |
+| email           | varchar(255) | NO   |     | NULL    |                |
+| password_digest | varchar(255) | NO   |     | NULL    |                |
+
+**Clock Event:**
+
+| Field        | Type     | Null | Key | Default | Extra          |
+| ------------ | -------- | ---- | --- | ------- | -------------- |
+| id           | int      | NO   | PRI | NULL    | auto_increment |
+| clock_in_at  | datetime | NO   |     | NOW()   |                |
+| clock_out_at | datetime | YES  |     | NULL    |                |
+
 ### 3. If you were given another day to work on this, how would you spend it? 
 
 - Only allow logged in users to view any part of the app
@@ -50,6 +69,8 @@ clock-in/out application, using traditional CRUD methods. The app should:
 - Add confirmation for user clock out
 - Handle additional scenarios clocking scenarios
     - If a user forgot to clock out yesterday and they want to clock in today, ask for confirmation
+- Improve date format
+- Additional unit and integration tests
 
 ### 4. What if you were given a month?
 
@@ -58,6 +79,7 @@ clock-in/out application, using traditional CRUD methods. The app should:
     - Is it a shared device or does each user use they're personal device?
     - What's the environment like (noisy, fast-paced, unsecured, etc.)
 - Is additional security necessary?
+    - Strict password requirements (1 uppercase, 1 lowercase, 1 symbol)
     - 2 Factor authentication
     - We don't want people intentionally/unintentionally clocking hours for others
     - How about biometric devices? Finger print, facial recognition, retina, etc.
@@ -85,6 +107,12 @@ clock-in/out application, using traditional CRUD methods. The app should:
     - Admins can see all users Clock Events, non-admins can only see their own
 - Extract the UI to a Front-end framework like React
     - Make the components reusable and mobile friendly
+- Change integer IDs to UUID (for scalability)
+- Add internationalization 
+- Use a Ruby gem like *Devise* for more robust authentication
+    - Social login, password resets, etc.
+- Add soft deletes for all models
+- Additional refactoring
 
 ## Design
 
@@ -146,7 +174,7 @@ Feature: User clocks in/out
   Scenario: Clocked in user clocks in again
     Given I'm already clocked in
     When I try to clock in again
-    Then I should be asked to confirm that I want to log in
+    Then I should be asked to confirm that I want to clock in
     When I confirm
     Then I should see that I'm logged in
     When I go to the Clock Events index page
@@ -174,3 +202,8 @@ Feature: View Clock Events
     When I go the Clock Events index page
     Then I should see the Clock Events for both users
 ```
+
+## References
+
+- [Stack Overflow - Time clock table design](https://bit.ly/2z1ZPMw)
+- [Stack Overflow - Database design employee clocking in and out system](https://bit.ly/2KTK8ga)

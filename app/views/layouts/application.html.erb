@@ -10,6 +10,18 @@
   </head>
 
   <body>
+    <header>
+      <%= link_to 'Home', :root  %>
+      <%= link_to 'Clock Events', :clock_events %>
+    </header>
+
+    <% flash.each do |key, value| %>
+        <% next unless %w(success warning danger info).include?(key) %>
+        <div class="<%= key %>">
+            <%= value %>
+        </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

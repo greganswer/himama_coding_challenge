@@ -1,0 +1,22 @@
+<h1>Clock in/out</h1>
+
+<%= form_tag(clock_in_path, method: :post) do %>
+    <%= label_tag(:q, "Email:") %>
+    <%= text_field_tag(:email) %>
+    <br>
+
+    <%= label_tag(:q, "Password:") %>
+    <%= password_field_tag(:password) %>
+    <br>
+
+    <% if flash[:data].to_h.dig('is_clocked_in_already') %>
+        <%= check_box_tag(:clock_in_again) %>
+        <%= label_tag(:clock_in_again, "Confirm clock in") %>
+        <br>
+    <% end %>
+
+    <br>
+
+    <%= submit_tag("Clock In") %>
+    <%= submit_tag("Clock Out", formaction: clock_out_path) %>
+<% end %>
