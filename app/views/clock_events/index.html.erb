@@ -1,27 +1,31 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Clock Events</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Clock in at</th>
-      <th>Clock out at</th>
-    </tr>
-  </thead>
+<div class="container">
+  <h3>Clock Events</h3>
 
-  <tbody>
-    <% @clock_events.each do |clock_event| %>
-      <tr id=<%= clock_event.id %>>
-        <td class="full_name"><%= clock_event.user.full_name %></td>
-        <td class="clock_in_at"><%= clock_event.clock_in_at %></td>
-        <td class="clock_out_at"><%= clock_event.clock_out_at %></td>
+  <table class="striped highlight responsive-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>User</th>
+        <th>Clock in at</th>
+        <th>Clock out at</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @clock_events.each do |clock_event| %>
+        <tr id=<%= clock_event.id %>>
+          <td class="number"><%= clock_event.id %></td>
+          <td class="full_name"><%= clock_event.user.full_name %></td>
+          <td class="clock_in_at"><%= clock_event.clock_in_at %></td>
+          <td class="clock_out_at"><%= clock_event.clock_out_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= paginate @clock_events %>
+  <%= paginate @clock_events %>
+</div>
+

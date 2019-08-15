@@ -8,6 +8,9 @@
   - [3. If you were given another day to work on this, how would you spend it?](#3-if-you-were-given-another-day-to-work-on-this-how-would-you-spend-it)
   - [4. What if you were given a month?](#4-what-if-you-were-given-a-month)
 - [Design](#design)
+  - [System requirements](#system-requirements)
+  - [Testing](#testing)
+  - [UI](#ui)
   - [User Stories](#user-stories)
 - [References](#references)
 
@@ -16,6 +19,10 @@
 1. Visit https://mighty-sands-32926.herokuapp.com
 1. The test email address is `jane@example.com` the password is `secret`
 1. Test out the [User Stories](#user-stories) linked below
+
+To deploy to production from your local machine, run the following:
+
+    git push heroku master
 
 ## Overview
 
@@ -46,10 +53,24 @@ clock-in/out application, using traditional CRUD methods. The app should:
 ### 1. How did you approach this challenge?
 
 1. Functionality first, design later. I want to make sure it works before I make it look good.
-1. Write user stories to make sure I understand the behavior of the system
-1. Create a data model for the `User` and `ClockEvent` models
+2. Write user stories to make sure I understand the behavior of the system
+3. Create a data model for the `User` and `ClockEvent` models
 
 ### 2. What schema design did you choose and why?
+
+I wanted each Clock Event to have a pair of `clock_in_at` and `clock_out_at` timestamps
+so that it would be easy to reconcile later for accounting purposes. I also designed the
+UI and the API to warn a user if they are trying to clock in a second time. This in case
+they forgot to log out earlier. They can clock in a second time if they confirm. This way
+they can clock in for this session and then they can notify the system admin that they 
+have a Clock Event that has not been clocked out. 
+
+This system is also designed to only clock out the previous Clock Event. This way the
+user cannot clock in on Monday, forget to clock out, Clock in again on Tuesday, then try 
+to clock out for Monday, giving them over 24 hours in one shift.
+
+For the user model I decided to use a unique email address for authentication. This way
+2 people named Jane Doe can use the system without error.
 
 **User:**
 
@@ -78,6 +99,9 @@ clock-in/out application, using traditional CRUD methods. The app should:
     - If a user forgot to clock out yesterday and they want to clock in today, ask for confirmation
 - Improve date format
 - Additional unit and integration tests
+- Improve CSS
+    - Extract inline styles to CSS classes
+    - Replace `<br>` with classes that have vertical margins
 
 ### 4. What if you were given a month?
 
@@ -120,8 +144,27 @@ clock-in/out application, using traditional CRUD methods. The app should:
     - Social login, password resets, etc.
 - Add soft deletes for all models
 - Additional refactoring
+- Setup Docker for easy deployment to Heroku, AWS, etc.
 
 ## Design
+
+### System requirements
+
+For local development, the following is required:
+- Ruby 2.6.3
+- Rails 5.2.3
+- Heroku CLI
+
+### Testing
+
+To save time, I wrote some simple System tests to make sure that everything works 
+from a user perspective. To run the test suite:
+
+    rails test:system
+    
+### UI
+
+To save time and still make it pretty, I decided to use the [Materialize CSS Framework](https://materializecss.com/). It's based on Google Material Design. I've used it in the past and I like the simplicity of it.
 
 ### User Stories
 

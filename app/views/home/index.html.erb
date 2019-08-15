@@ -1,22 +1,37 @@
-<h1>Clock in/out</h1>
-
-<%= form_tag(clock_in_path, method: :post) do %>
-    <%= label_tag(:email, "Email:") %>
-    <%= text_field_tag(:email) %>
+<div class="container" style="max-width: 500px">
+    <h3>Clock In/Out</h3>
     <br>
 
-    <%= label_tag(:password, "Password:") %>
-    <%= password_field_tag(:password) %>
-    <br>
+    <div class="card-panel">
+        <%= form_tag(clock_in_path, method: :post) do %>
+            <!-- NOTE: The authenticity_token is added here because sometimes the "Clock Out" submit button fails -->
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
-    <% if flash[:data].to_h.dig('is_clocked_in_already') %>
-        <%= check_box_tag(:clock_in_again) %>
-        <%= label_tag(:clock_in_again, "Confirm clock in") %>
-        <br>
-    <% end %>
+            <%= label_tag(:email, "Email:") %>
+            <%= text_field_tag(:email) %>
+            <br>
 
-    <br>
+            <%= label_tag(:password, "Password:") %>
+            <%= password_field_tag(:password) %>
+            <br>
 
-    <%= submit_tag("Clock In") %>
-    <%= submit_tag("Clock Out", formaction: clock_out_path) %>
-<% end %>
+            <% if flash[:data].to_h.dig('is_clocked_in_already') %>
+                <br>
+                <label name="clock_in_again">
+                    <input type="checkbox" name="clock_in_again" id="clock_in_again" value="1">
+                    <span>Confirm clock in</span>
+                </label>
+                <br>
+            <% end %>
+
+            <br>
+
+            <%= submit_tag("Clock In", class: "btn white-text left green") %>
+            <%= submit_tag("Clock Out", class: "btn white-text right red", formaction: clock_out_path) %>
+
+            <br>
+            <br>
+
+        <% end %>
+    </div>
+</div>

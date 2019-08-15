@@ -5,23 +5,54 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+     <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <header>
-      <%= link_to 'Home', :root  %>
-      <%= link_to 'Clock Events', :clock_events %>
-    </header>
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper teal">
+          <a href="<%= root_path %>" class="brand-logo">&nbsp; HiMama</a>
+          <ul class="right hide-on-med-and-down">
+            <li><%= link_to 'Clock In/Out', :root %></li>
+            <li><%= link_to 'Clock Events', :clock_events %></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
 
     <% flash.each do |key, value| %>
-        <% next unless %w(success warning danger info).include?(key) %>
-        <div class="<%= key %>">
-            <%= value %>
+      <% next unless %w(success warning danger info).include?(key) %>
+      <% colors = {"success" => :green, "warning" => :yellow, "danger" => :red, "info" => :blue} %>
+      <div class="container center" style="max-width: 600px">
+        <div class="card <%= colors[key]%> lighten-5">
+        <h5 class="<%= colors[key]%>-text text-darken-4" style="padding: .5em"><%= value %></h5>
         </div>
+        <br>
+      </div>
     <% end %>
 
-    <%= yield %>
+   
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer class="page-footer teal">
+        <div class="container">
+          © 2019 Copyright Greg Answer
+          <a class="grey-text text-lighten-4 right" href="https://github.com/greganswer/himama_coding_challenge"> 
+            GitHub Repo
+          </a>
+        </div>
+        <br>
+    </footer>
   </body>
 </html>

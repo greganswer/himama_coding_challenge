@@ -4,5 +4,7 @@ require 'rails/test_help'
 
 class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods
-  FactoryBot.find_definitions
+  
+  # NOTE: Uncomment the line below if FactoryBot cannot find factories
+  # FactoryBot.find_definitions
 end
